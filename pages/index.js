@@ -13,11 +13,12 @@ const title = `Online High School Hackathons in ${new Date().getFullYear()}`
 const eventsPreview = events =>
   slice(events, 0, 4)
     .map(
-      event => `${event.name} (${humanizedDateRange(event.start, event.end)}) … `
+      event =>
+        `${event.name} (${humanizedDateRange(event.start, event.end)}) … `
     )
     .join('')
 
-export default ({ stats, emailStats, events }) => (
+const Index = ({ stats, emailStats, events }) => (
   <Grouping
     includeMeta={false}
     header={
@@ -107,3 +108,5 @@ export const getStaticProps = async () => {
   )
   return { props: { events, stats, emailStats }, revalidate: 1 }
 }
+
+export default Index

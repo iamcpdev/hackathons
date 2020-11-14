@@ -14,7 +14,7 @@ Object.entries(palette).map(([name, bg], i) => {
   rainbow[`&:nth-of-type(${Object.keys(palette).length}n + ${i + 1})`] = { bg }
 })
 
-export default ({ showAll = false }) => (
+const Years = ({ showAll = false }) => (
   <Grid columns={[1, 2, showAll ? 5 : 4]} gap={[3, 4]}>
     {showAll && (
       <Link href="/" passHref>
@@ -32,3 +32,5 @@ export default ({ showAll = false }) => (
     ))}
   </Grid>
 )
+
+export default Years

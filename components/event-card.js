@@ -1,5 +1,8 @@
-import { Card, Badge, Box, Heading, Text, Flex, Image } from 'theme-ui'
+/** @jsxRuntime classic */
+/** @jsx jsx */
+import { jsx, Card, Badge, Box, Heading, Text, Flex } from 'theme-ui'
 import Tilt from './tilt'
+import Img from 'next/image'
 import { humanizedDateRange, formatAddress, trackClick } from '../lib/util'
 
 const EventCard = ({
@@ -38,12 +41,25 @@ const EventCard = ({
       itemType="http://schema.org/Event"
       variant="event"
       sx={{ display: invisible ? 'none' : 'flex' }}
-      style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.375) 75%), url('${banner}')`
-      }}
     >
+      <Img
+        src={banner}
+        unsized
+        style={{
+          objectFit: 'cover',
+          objectPosition: 'center',
+          maskImage:
+            'linear-gradient(rgba(0,0,0,0) 0%, rgba(0,0,0,0.375) 75%))',
+          position: 'absolute',
+          zIndex: -1,
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0
+        }}
+      />
       {mlhAssociated && (
-        <Image
+        <img
           src="/mlh-logo-grayscale.svg"
           alt="MLH is associated"
           width={64}
@@ -59,10 +75,11 @@ const EventCard = ({
         />
       )}
       {logo && (
-        <Image
+        <Img
           src={logo}
           alt={`${name} logo`}
           loading="lazy"
+          unsized
           sx={{
             minWidth: 64,
             height: 64,
@@ -72,7 +89,11 @@ const EventCard = ({
           }}
         />
       )}
-      <Heading as="h3" itemProp="name" sx={{ fontSize: [3, 4], mt: 2, mb: 3, overflowWrap: "anywhere" }}>
+      <Heading
+        as="h3"
+        itemProp="name"
+        sx={{ fontSize: [3, 4], mt: 2, mb: 3, overflowWrap: 'anywhere' }}
+      >
         {name}
       </Heading>
       <Flex

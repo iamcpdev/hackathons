@@ -2,7 +2,7 @@ import { Box, Container, Heading } from 'theme-ui'
 import Head from 'next/head'
 import Meta from '@hackclub/meta'
 
-export default ({
+const Header = ({
   centered = true,
   title,
   desc,
@@ -49,3 +49,5 @@ export default ({
     </Container>
   </Box>
 )
+
+export default Header

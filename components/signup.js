@@ -20,7 +20,7 @@ const Loading = () => (
   />
 )
 
-export default ({ initialLocation, stats = {} }) => {
+const Signup = ({ initialLocation, stats = {} }) => {
   const [email, setEmail] = useState('')
   const [location, setLocation] = useState(
     initialLocation ? initialLocation.replace('the ', '') : ''
@@ -28,7 +28,7 @@ export default ({ initialLocation, stats = {} }) => {
   const [submitting, setSubmitting] = useState(false)
   const [done, setDone] = useState(false)
   const [error, setError] = useState('')
-  const onSubmit = async (e) => {
+  const onSubmit = async e => {
     e.preventDefault()
     if (email.length < 3 || location.length < 3) return
     setSubmitting(true)
@@ -91,7 +91,7 @@ export default ({ initialLocation, stats = {} }) => {
             id="email"
             placeholder="me@email.com"
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
         <div>
@@ -100,7 +100,7 @@ export default ({ initialLocation, stats = {} }) => {
             id="location"
             placeholder="Chicago, IL"
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
+            onChange={e => setLocation(e.target.value)}
           />
         </div>
         <Button type="submit" sx={{ mt: [2, 0] }}>
@@ -129,3 +129,5 @@ export default ({ initialLocation, stats = {} }) => {
     </Card>
   )
 }
+
+export default Signup

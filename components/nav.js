@@ -70,7 +70,7 @@ const ColorSwitcher = props => {
   )
 }
 
-export default () => {
+const Nav = () => {
   const router = useRouter()
   const home = router.pathname === '/'
   return (
@@ -128,3 +128,5 @@ export default () => {
     </Box>
   )
 }
+
+export default Nav

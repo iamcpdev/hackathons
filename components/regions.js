@@ -3,7 +3,7 @@ import { Grid, Card, Heading } from 'theme-ui'
 import { kebabCase, startCase } from 'lodash'
 import Link from 'next/link'
 
-export default ({ showAll = false, sx = {} }) => (
+const Regions = ({ showAll = false, sx = {} }) => (
   <Grid
     columns={[1, 2, 4]}
     gap={[3, 4]}
@@ -64,3 +64,5 @@ export default ({ showAll = false, sx = {} }) => (
     ))}
   </Grid>
 )
+
+export default Regions
