@@ -76,7 +76,7 @@ const EventCard = ({
         {virtual ? 'Online' : 'In-Person'}
       </Badge>
 
-      {logo && (
+      {logo ? (
         <Image
           src={logo}
           alt={`${name} logo`}
@@ -89,6 +89,8 @@ const EventCard = ({
             mt: 'auto'
           }}
         />
+        ) : (
+          <Box sx={{ height: 64 }} />
       )}
       <Heading as="h3" itemProp="name" sx={{ fontSize: [3, 4], mt: 2, mb: 3, overflowWrap: "anywhere" }}>
         {name}
