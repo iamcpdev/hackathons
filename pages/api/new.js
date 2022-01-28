@@ -46,7 +46,7 @@ export default async function handler(req, res) {
       logo: data.logo,
       banner: data.banner
     })
-    const url = 'https://hackathons.hackclub.com'
+    const url = 'https://hackathons.hackclub.com/api/new/'
     const body = JSON.stringify({
       hackathon
     })

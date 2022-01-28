@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Label, Checkbox, Input, Text } from 'theme-ui'
+import { Box, Label, Checkbox, Input, Text } from 'theme-ui'
 import { capitalize } from 'lodash'
 
 const Field = React.forwardRef(
@@ -22,12 +22,32 @@ const Field = React.forwardRef(
         onClick={type === 'checkbox' ? props.onChange : null}
       >
         {type === 'checkbox' ? (
-          <Flex sx={{ alignItems: 'center' }}>
-            <Checkbox ref={ref} id={name} name={name} type={type} {...props} />
-            <Label htmlFor={name} sx={{ ml: 1, lineHeight: 'heading' }}>
+          <Box
+            sx={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center'
+            }}
+          >
+            <Label
+              htmlFor={name}
+              sx={{
+                ml: 1,
+                lineHeight: 'heading',
+                display: 'flex',
+                flexDirection: 'row-reverse'
+              }}
+            >
               {label || capitalize(name)}
+              <Checkbox
+                ref={ref}
+                id={name}
+                name={name}
+                type={type}
+                {...props}
+              />
             </Label>
-          </Flex>
+          </Box>
         ) : (
           <>
             <Label htmlFor={name}>{label || capitalize(name)}</Label>
