@@ -99,7 +99,7 @@ export default () => {
         <Button
           as="a"
           variant="outline"
-          href="https://hack.af/submit-hackathon"
+          href="/new"
           aria-label="Apply to list your hackathon"
           sx={{
             width: 'auto',
