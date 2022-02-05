@@ -25,27 +25,12 @@ export default () => {
     banner: '',
     logo: ''
   })
-
-  const [image, setImage] = useState([])
-  const [imageURL, setImageURL] = useState([])
-
   const onChange = ({ target }) => {
     let { value } = target
     if (target.type === 'checkbox') value = Boolean(value)
     setFields(data => ({ ...data, [target.id]: value }))
   }
-  useEffect(() => {
-    const newImageUrl = imageURL.map(image => {
-      newImageUrl(URL.createObjectURL(image))
-    })
-    // image(image => newImageUrl(URL.createObjectURL(image)))
-    // setImageURL(newImageUrl)
-  }, [image])
-  const onImageChange = ({ target }) => {
-    setImage(data => [...data, target.files[0]])
-  }
-  const [file, setFile] = useState(null)
-  const inputRef = useRef()
+
   useEffect(() => console.log(fields), [fields]) // for debugging
 
   return (
@@ -185,8 +170,6 @@ export default () => {
               accept="image/*"
               value={fields.banner}
               // onChange={onChange}
-              onChange={() => setFiles(inputRef.current.files[0])}
-              ref={inputRef}
             />
             <Button type="submit">Submit</Button>
           </Grid>
@@ -198,13 +181,6 @@ export default () => {
             logo={extractFilename(fields.logo)}
             banner={extractFilename(fields.banner)}
           />
-          {/* <EventCard
-            key={imageSrc}
-            {...fields}
-            // logo={extractFilename(fields.logo)}
-            logo={imageSrc}
-            banner={extractFilename(fields.banner)}
-          /> */}
         </Box>
       </Container>
     </>
