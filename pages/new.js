@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Container, Grid, Box, Button, Input, Label } from 'theme-ui'
 import Header from '../components/header'
 import Field from '../components/field'
@@ -26,8 +26,8 @@ export default () => {
     logo: ''
   })
 
-  const [images, setImages] = useState([])
-  const [imageURLs, setImageURLs] = useState([])
+  const [image, setImage] = useState([])
+  const [imageURL, setImageURL] = useState([])
 
   const onChange = ({ target }) => {
     let { value } = target
@@ -35,14 +35,17 @@ export default () => {
     setFields(data => ({ ...data, [target.id]: value }))
   }
   useEffect(() => {
-    // if (images.length < 1) return
-    const newImageUrls = []
-    images.forEach(image => newImageUrls.push(URL.createObjectURL(image)))
-    setImageURLs(newImageUrls)
-  }, [images])
+    const newImageUrl = imageURL.map(image => {
+      newImageUrl(URL.createObjectURL(image))
+    })
+    // image(image => newImageUrl(URL.createObjectURL(image)))
+    // setImageURL(newImageUrl)
+  }, [image])
   const onImageChange = ({ target }) => {
-    setImages(data => [...data, target.files[0]])
+    setImage(data => [...data, target.files[0]])
   }
+  const [file, setFile] = useState(null)
+  const inputRef = useRef()
   useEffect(() => console.log(fields), [fields]) // for debugging
 
   return (
@@ -64,15 +67,6 @@ export default () => {
       >
         <Box as="form" action="/api/new" method="POST">
           <Grid columns={[null, 2]} gap={[3, 4]}>
-            <Label htmlFor="banner">
-              <Input
-                type="file"
-                name="banner"
-                id="banner"
-                onChange={onImageChange}
-              />
-            </Label>
-
             <Field
               label="Your email address"
               name="email"
@@ -176,7 +170,7 @@ export default () => {
               half
             />
 
-            {/* <Field
+            <Field
               label="Please attach a logo for your event card"
               name="logo"
               type="file"
@@ -190,22 +184,27 @@ export default () => {
               type="file"
               accept="image/*"
               value={fields.banner}
-              onChange={onChange}
-            /> */}
+              // onChange={onChange}
+              onChange={() => setFiles(inputRef.current.files[0])}
+              ref={inputRef}
+            />
             <Button type="submit">Submit</Button>
           </Grid>
         </Box>
 
         <Box sx={{ gridRow: [-1, 'auto'] }}>
-          {imageURLs.map(imageSrc => (
-            <EventCard
-              key={imageSrc}
-              {...fields}
-              // logo={extractFilename(fields.logo)}
-              logo={imageSrc}
-              banner={extractFilename(fields.banner)}
-            />
-          ))}
+          <EventCard
+            {...fields}
+            logo={extractFilename(fields.logo)}
+            banner={extractFilename(fields.banner)}
+          />
+          {/* <EventCard
+            key={imageSrc}
+            {...fields}
+            // logo={extractFilename(fields.logo)}
+            logo={imageSrc}
+            banner={extractFilename(fields.banner)}
+          /> */}
         </Box>
       </Container>
     </>
